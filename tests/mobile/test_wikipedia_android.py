@@ -3,7 +3,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 from selene import browser, have
 
 
-def test_search():
+def test_search(android_management):
 
     with step('Type search'):
         browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_skip_button')).click()
@@ -15,7 +15,7 @@ def test_search():
         results.should(have.size_greater_than(0))
         results.first.should(have.text('Appium'))
 
-def test_open_article():
+def test_open_article(android_management):
 
     with step('Type search'):
         browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_skip_button')).click()
