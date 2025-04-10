@@ -44,7 +44,7 @@ def android_management():
         'deviceName': 'Google Pixel 3',
 
         # Set URL of the application under test
-        'app': 'bs://02ab46887d0bba94114568768536f93a6de07d68',
+        'app': config.app,
         "appWaitActivity": "org.wikipedia.*",
 
         # Set other BrowserStack capabilities
