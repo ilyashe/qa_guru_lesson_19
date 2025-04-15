@@ -29,3 +29,25 @@ def test_open_article(android_management):
         browser.element(
             (AppiumBy.XPATH, '//android.widget.TextView[@text="Appium"]')
         )
+
+def test_getting_started(android_management):
+
+    with ((step('Open second page'))):
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_forward_button')).click()
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/primaryTextView')
+                        ).should(have.text('New ways to explore'))
+
+    with ((step('Open third page'))):
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_forward_button')).click()
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/primaryTextView')
+                        ).should(have.text('Reading lists with sync'))
+
+    with ((step('Open fourth page'))):
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_forward_button')).click()
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/primaryTextView')
+                        ).should(have.text('Data & Privacy'))
+
+    with ((step('Click get started'))):
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/fragment_onboarding_done_button')).click()
+        browser.element((AppiumBy.ID, 'org.wikipedia.alpha:id/view_card_header_title')
+                        ).should(have.text('Wikipedia games'))
