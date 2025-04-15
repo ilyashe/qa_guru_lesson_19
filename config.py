@@ -1,11 +1,14 @@
+from typing import Literal
+
 from pydantic_settings import BaseSettings
 import os
 from pathlib import Path
 from dotenv import load_dotenv
 
+Context = Literal['local_emulator', 'local_real', 'bstack']
 
 class Config(BaseSettings):
-    context: str = 'local_emulator'
+    context: Context = 'local_emulator'
 
     bstack_userName: str = ''
     bstack_accessKey: str = ''
