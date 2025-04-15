@@ -8,33 +8,6 @@ from selene_in_action import utils
 from appium import webdriver
 
 
-def init_app_session(options):
-    with allure.step('init app session'):
-        browser.config.driver = webdriver.Remote(
-            config.remote_url,
-            options=options
-        )
-
-    browser.config.timeout = config.timeout
-    browser.config._wait_decorator = support._logging.wait_with(
-        context=allure_commons._allure.StepContext
-    )
-
-
-def tear_down_session():
-    utils.attach.attach_screenshot(browser)
-    utils.attach.attach_xml(browser)
-
-
-    session_id = browser.driver.session_id
-
-    with allure.step('tear down app session'):
-        browser.quit()
-
-    if config.context == 'bstack':
-        utils.attach.attach_bstack_video(session_id)
-
-
 @pytest.fixture(scope='function')
 def android_management():
     options_dict = {
@@ -61,6 +34,25 @@ def android_management():
             'accessKey': config.bstack_accessKey,
         })
 
-    init_app_session(options)
+    with allure.step('init app session'):
+        browser.config.driver = webdriver.Remote(
+            config.remote_url,
+            options=options
+        )
+
+    browser.config.timeout = config.timeout
+    browser.config._wait_decorator = support._logging.wait_with(
+        context=allure_commons._allure.StepContext
+    )
+
     yield
-    tear_down_session()
+    utils.attach.attach_screenshot(browser)
+    utils.attach.attach_xml(browser)
+
+    session_id = browser.driver.session_id
+
+    with allure.step('tear down app session'):
+        browser.quit()
+
+    if config.context == 'bstack':
+        utils.attach.attach_bstack_video(session_id)
