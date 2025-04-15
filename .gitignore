@@ -33,4 +33,4 @@ allure-results/
 .venv*
 venv*/
 
-.env
+.env.credentials

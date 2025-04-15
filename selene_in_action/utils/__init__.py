@@ -1,1 +1,1 @@
-from . import attach
+from . import attach, resource
